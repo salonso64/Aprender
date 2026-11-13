@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La aventura de Dylan · Motocross English</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<main class="app">
+ <div class="top"><span>🏁 DYLAN'S MOTOCROSS</span><button class="btn secondary" id="globalHome" style="padding:4px 10px;font-size:12px">🏠 Menú Principal</button></div>
+ <header class="hero" id="hero"><div class="kicker">¡HOLA, CAMPEÓN!</div><h1>La aventura de Dylan</h1><p>Aprende inglés jugando. Supera los retos, avanza con tu moto y llega hasta la meta.</p><div class="hero-moto">🏍️</div></header>
+
+ <!-- MENÚ PRINCIPAL: asignaturas -->
+ <section id="home" class="screen panel">
+  <h2>Elige una asignatura</h2><p class="muted">¿Qué vamos a aprender hoy?</p>
+  <button class="subject" id="btnEnglish"><span class="emoji">🇬🇧</span><span><b>Inglés</b><span class="muted">Números y Horas</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
+  <p class="muted center" style="margin-bottom:0">¡Próximamente habrá más asignaturas!</p>
+ </section>
+
+ <!-- MENÚ DE INGLÉS: temas (cada botón abre un juego con data-game) -->
+ <section id="english-topics" class="screen panel hidden">
+  <button class="btn secondary" id="backToHome">← Menú Principal</button>
+  <h2 style="margin-top:14px">🇬🇧 Inglés - Elige un tema</h2><p class="muted">Selecciona qué aventura de motocross quieres jugar hoy.</p>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+   <button class="subject" data-game="numbers"><span class="emoji">🔢</span><span><b>Los números (0 al 20)</b><span class="muted">Aprende y repasa los números</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
+   <button class="subject" data-game="hours"><span class="emoji">⏰</span><span><b>Las horas en inglés</b><span class="muted">Aprende To, Past y O'clock</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
+   <button class="subject" data-game="tobe"><span class="emoji">🙋</span><span><b>El verbo To BE</b><span class="muted">I am, You are, He is...</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
+  </div>
+ </section>
+
+ <!-- Aquí cada juego añade su pantalla de aprendizaje (js/numeros.js, js/horas.js) -->
+ <div id="screens"></div>
+
+ <!-- PANTALLA DE JUEGO (común a todos los juegos) -->
+ <section id="play" class="screen hidden">
+  <div class="panel">
+   <div class="playhead"><button class="btn secondary" id="backlearn">← Volver</button><b id="counter">RETO 1 DE 4</b></div>
+   <div class="track"><div id="progress" style="width:0%"></div></div>
+   <div class="playtitle"><span class="mini-moto">🏍️</span><div><div class="exercise-title" id="title"></div><div class="instruction" id="description"></div></div></div>
+  </div>
+  <div class="panel"><div id="exercise"></div><div id="feedback" aria-live="polite"></div><button id="next" class="btn hidden" style="width:100%;margin-top:13px">SIGUIENTE RETO ➜</button></div>
+ </section>
+
+ <!-- PANTALLA FINAL -->
+ <section id="finish" class="screen panel center hidden">
+  <div class="trophy">🏆</div><h2>¡LO HAS CONSEGUIDO, DYLAN!</h2><h3>¡Eres un campeón absoluto!</h3><div style="font-size:42px;margin:15px">🏍️ ⭐ 🏁</div><p>Has superado todos los retos con éxito. ¡Estamos muy orgullosos de ti!</p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:15px">
+   <button class="btn" id="again">🔄 Volver a jugar</button>
+   <button class="btn secondary" id="toMenuFinish">🏠 Menú Principal</button>
+  </div>
+ </section>
+ <div class="footer">⭐ Cada pequeño paso te convierte en un gran campeón ⭐</div>
+</main>
+
+<!-- El orden importa: primero el motor común, luego los juegos, y al final el menú -->
+<script src="js/common.js"></script>
+<script src="js/numeros.js"></script>
+<script src="js/horas.js"></script>
+<script src="js/tobe.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>
