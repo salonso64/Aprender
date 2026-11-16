@@ -1,7 +1,7 @@
 /* MOTOR COMÚN: lo usan todos los juegos (pantallas, retos de opciones, cables y letras) */
 (()=>{
 const $=id=>document.getElementById(id);
-const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+const shuffle=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;};
 const range=n=>Array.from({length:n},(_,i)=>i);
 const D=window.Dylan={$,shuffle,range,games:{},state:{mode:null,stage:0,completed:{},lives:5}};
 const S=D.state;
@@ -9,16 +9,17 @@ let locked=false,selected=null,matched=[],dragging=null,cableTotal=0,rowDone=0;
 
 /* ---------- Pantallas ---------- */
 D.show=id=>{
+ if(D.stopSpeech)D.stopSpeech();else if(window.speechSynthesis)window.speechSynthesis.cancel();
  document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('hidden',el.id!==id));
  $('hero').classList.toggle('hidden',id==='play');
  window.scrollTo(0,0);
 };
 D.msg=(t,type='try')=>{$('feedback').innerHTML=`<div class="feedback ${type}">${t}</div>`};
-D.addScreen=(id,html)=>{
+D.addScreen=(id,html,back='english-topics')=>{
  const sec=document.createElement('section');
  sec.id=id;sec.className='screen hidden';sec.innerHTML=html;
  $('screens').appendChild(sec);
- sec.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>D.show('english-topics'));
+ sec.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>D.show(back));
  sec.querySelectorAll('[data-start]').forEach(b=>b.onclick=()=>D.setupStage(0));
 };
 D.routePanel=(text,btn)=>`<div class="panel"><h2>🏁 Tu recorrido de motocross</h2><p class="muted">${text}</p><div class="route"></div><div class="stagecards"></div><button class="btn" data-start style="width:100%;margin-top:15px">${btn}</button></div>`;
@@ -59,9 +60,9 @@ function later(redraw,ms){const s=S.stage,m=S.mode;setTimeout(()=>{if(S.stage===
 
 /* ---------- Reto de opciones (filas) ----------
    items: [{label(html), correct(texto), opts[textos]}] */
-D.drawRows=(items,title,cols,redraw,two)=>{
+D.drawRows=(items,title,cols,redraw,two,extra)=>{
  locked=false;rowDone=0;const N=items.length;
- $('exercise').innerHTML=`<div class="exercise-title">${title}</div><div class="wordrows${two?' two':''}" id="rows">${items.map((r,k)=>`<div class="wordrow" data-row="${k}"><div class="wordnum">${r.label}</div><div class="opts" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${r.opts.map(o=>`<button class="opt" data-v="${o}">${o}</button>`).join('')}</div></div>`).join('')}</div><p class="muted center" id="rowCount">0 de ${N} correctas</p>`;
+ $('exercise').innerHTML=`<div class="exercise-title">${title}</div><div class="wordrows${two?' two':''}${extra?' '+extra:''}" id="rows">${items.map((r,k)=>`<div class="wordrow" data-row="${k}"><div class="wordnum">${r.label}</div><div class="opts" style="grid-template-columns:repeat(${cols},minmax(0,1fr))">${r.opts.map(o=>`<button class="opt" data-v="${o}">${o}</button>`).join('')}</div></div>`).join('')}</div><p class="muted center" id="rowCount">0 de ${N} correctas</p>`;
  $('rows').querySelectorAll('.wordrow').forEach(el=>el.querySelectorAll('button').forEach(b=>b.onclick=()=>{
   if(locked||el.dataset.done)return;
   const ok=items[+el.dataset.row].correct;
@@ -72,8 +73,9 @@ D.drawRows=(items,title,cols,redraw,two)=>{
    if(rowDone===N){locked=true;D.msg('🎉 ¡Excelente, Dylan! ⭐','good');setTimeout(D.completeStage,1000);}
    else D.msg('¡Correcto! Sigue así ⭐','good');
   }else{
-   locked=true;D.msg('¡No pasa nada, Dylan! 😊 Empezamos de nuevo este reto.');
-   later(redraw,1300);
+   const why=items[+el.dataset.row].why;
+   locked=true;D.msg('¡No pasa nada, Dylan! 😊 '+(why?why+' ':'')+'Empezamos de nuevo este reto.');
+   later(redraw,why?3600:1300);
   }
  }));
 };

@@ -4,6 +4,8 @@ const D=Dylan,$=D.$;
 
 $('btnEnglish').onclick=()=>D.show('english-topics');
 $('backToHome').onclick=()=>D.show('home');
+$('btnSpanish').onclick=()=>D.show('spanish-topics');
+$('backToHomeEs').onclick=()=>D.show('home');
 $('globalHome').onclick=()=>D.show('home');
 $('toMenuFinish').onclick=()=>D.show('home');
 

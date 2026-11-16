@@ -3,18 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La aventura de Dylan · Motocross English</title>
+<title>La aventura de Dylan · Motocross</title>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <main class="app">
  <div class="top"><span>🏁 DYLAN'S MOTOCROSS</span><button class="btn secondary" id="globalHome" style="padding:4px 10px;font-size:12px">🏠 Menú Principal</button></div>
- <header class="hero" id="hero"><div class="kicker">¡HOLA, CAMPEÓN!</div><h1>La aventura de Dylan</h1><p>Aprende inglés jugando. Supera los retos, avanza con tu moto y llega hasta la meta.</p><div class="hero-moto">🏍️</div></header>
+ <header class="hero" id="hero"><div class="kicker">¡HOLA, CAMPEÓN!</div><h1>La aventura de Dylan</h1><p>Aprende jugando. Supera los retos, avanza con tu moto y llega hasta la meta.</p><div class="hero-moto">🏍️</div></header>
 
  <!-- MENÚ PRINCIPAL: asignaturas -->
  <section id="home" class="screen panel">
   <h2>Elige una asignatura</h2><p class="muted">¿Qué vamos a aprender hoy?</p>
   <button class="subject" id="btnEnglish"><span class="emoji">🇬🇧</span><span><b>Inglés</b><span class="muted">Números y Horas</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
+  <button class="subject" id="btnSpanish" style="margin-top:10px"><span class="emoji">🇪🇸</span><span><b>Castellano</b><span class="muted">Ortografía y adivinanzas</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
   <p class="muted center" style="margin-bottom:0">¡Próximamente habrá más asignaturas!</p>
  </section>
 
@@ -26,6 +27,15 @@
    <button class="subject" data-game="numbers"><span class="emoji">🔢</span><span><b>Los números (0 al 20)</b><span class="muted">Aprende y repasa los números</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
    <button class="subject" data-game="hours"><span class="emoji">⏰</span><span><b>Las horas en inglés</b><span class="muted">Aprende To, Past y O'clock</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
    <button class="subject" data-game="tobe"><span class="emoji">🙋</span><span><b>El verbo To BE</b><span class="muted">I am, You are, He is...</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
+  </div>
+ </section>
+
+ <!-- MENÚ DE CASTELLANO: temas -->
+ <section id="spanish-topics" class="screen panel hidden">
+  <button class="btn secondary" id="backToHomeEs">← Menú Principal</button>
+  <h2 style="margin-top:14px">🇪🇸 Castellano - Elige un tema</h2><p class="muted">Selecciona qué aventura de palabras quieres jugar hoy.</p>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+   <button class="subject" data-game="ortografia"><span class="emoji">✏️</span><span><b>Ortografía y acentuación</b><span class="muted">¡Pasa los retos del circuito y llega a la gran ADIVINANZA final! 🕵️</span></span><span style="margin-left:auto;font-size:24px">➜</span></button>
   </div>
  </section>
 
@@ -58,6 +68,7 @@
 <script src="js/numeros.js"></script>
 <script src="js/horas.js"></script>
 <script src="js/tobe.js"></script>
+<script src="js/castellano.js"></script>
 <script src="js/menu.js"></script>
 </body>
 </html>
