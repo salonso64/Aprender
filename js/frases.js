@@ -139,6 +139,19 @@ const ORDEN=[
  'Mi abuela cocina muy bien, por eso siempre repito.'
 ].map(x=>Array.isArray(x)?x:[x]);
 
+// Compara lo escrito con la frase correcta (subsecuencia común): las palabras que no encajan salen en rojo
+function diffWords(u,t){
+ const n=u.length,m=t.length,dp=Array.from({length:n+1},()=>Array(m+1).fill(0));
+ for(let a=n-1;a>=0;a--)for(let b=m-1;b>=0;b--)dp[a][b]=u[a]===t[b]?dp[a+1][b+1]+1:Math.max(dp[a+1][b],dp[a][b+1]);
+ const good=Array(n).fill(false);let a=0,b=0;
+ while(a<n&&b<m){
+  if(u[a]===t[b]){good[a]=true;a++;b++;}
+  else if(dp[a+1][b]>=dp[a][b+1])a++;
+  else b++;
+ }
+ return good;
+}
+
 function reto2(){
  const items=pick(ORDEN,4);
  const ex=D.$('exercise');
@@ -174,8 +187,15 @@ function reto2(){
   if(!pool.length&&!sobran.length)pista='Tienes todas las palabras, pero <b>el orden no es el correcto</b>.';
   else pista=`Revisa las palabras: ${pool.length?`te falta ${pool.map(w=>'«'+esc(w)+'»').join(', ')}`:''}${pool.length&&sobran.length?' y ':''}${sobran.length?`sobra ${sobran.map(w=>'«'+esc(w)+'»').join(', ')}`:''}.`;
   over=true;cards[k].classList.add('bad');ins.forEach(i=>i.disabled=true);oks.forEach(b=>b.disabled=true);
-  D.msg(`¡Casi, Dylan! 🤔 La frase ${k+1} no está bien. ${pista}<br>La frase correcta era: <b>${esc(target)}</b><br>Empezamos de nuevo con frases nuevas.`,'try');
-  D.later(reto2,6500);
+  // el error se enseña dentro de la propia frase: lo escrito con las palabras mal en rojo, y debajo la frase correcta
+  const good=diffWords(uw,tw);
+  const det=document.createElement('div');det.className='od-detail';
+  det.innerHTML=`<div class="od-lbl">Lo que has escrito:</div><div class="od-said">${uw.map((w,j)=>`<span class="w ${good[j]?'ok':'no'}">${esc(w)}</span>`).join(' ')}</div>
+   <div class="od-lbl">La frase correcta es:</div><div class="od-right">${esc(target)}</div>`;
+  cards[k].querySelector('.od-main').appendChild(det);
+  D.msg(`¡Casi, Dylan! 🤔 La frase ${k+1} no está bien. ${pista}<br>Mira las palabras en rojo.<br>Empezamos de nuevo con frases nuevas.<br><button class="btn" id="odAgain" style="margin-top:10px">🔄 Entendido, ¡otra vez!</button>`,'try');
+  D.$('odAgain').onclick=reto2;
+  if(cards[k].scrollIntoView)cards[k].scrollIntoView({behavior:'smooth',block:'center'});
  };
  oks.forEach(b=>b.onclick=()=>validar(+b.dataset.k));
  ins.forEach((i,k)=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();validar(k);}}));

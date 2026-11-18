@@ -130,3 +130,9 @@ h2{font-size:23px;margin:0 0 8px}h3{margin:0 0 7px}.muted{color:#667970;font-siz
 .mcard .front .wd{font-size:clamp(13px,3.6vw,18px);font-weight:900;overflow-wrap:anywhere;text-align:center;line-height:1.1}
 .mcard.done .front{background:#e2f5e8;border-color:#69b77c}
 @media(max-width:440px){.mem-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.od-detail{margin-top:10px;padding:10px 12px;border-radius:12px;background:#fff;border:1px solid #f0c4c4}
+.od-lbl{font-size:12px;font-weight:800;color:#8d3030;letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+.od-said{font-size:18px;font-weight:800;line-height:1.9;margin-bottom:6px}
+.od-said .w{display:inline-block;padding:0 6px;border-radius:7px}
+.od-said .w.ok{background:#e0f6e6;color:#17603b}.od-said .w.no{background:#ffdede;color:#8d3030;text-decoration:underline wavy #d55}
+.od-right{font-size:18px;font-weight:900;color:#17603b}
