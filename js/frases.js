@@ -24,8 +24,8 @@ D.addScreen('learn-frases',`
     Entre vocales, sonido suave → <b>r</b>: <span class="ex">pirata, caramelo</span></div>
    <div class="es-tip"><b>Ordenar frases</b><br>
     Empieza con <b>mayúscula</b> y acaba con <b>punto</b>.
-    Los conectores suelen ir al principio y llevan <b>coma</b>:
-    <span class="ex">Después, comimos. · Además, jugamos.</span></div>
+    Los conectores pueden ir <b>al principio</b> (con coma) o <b>en medio</b> de la frase:
+    <span class="ex">Además, jugamos. · Llovía, por eso nos quedamos.</span></div>
    <div class="es-tip"><b>Conectores para ordenar</b><br>
     <span class="ex">primero · después · luego · entonces · por último · finalmente</span>
     <b>Para añadir:</b> <span class="ex">además · también</span></div>
@@ -111,24 +111,32 @@ function reto1(){
    Si una frase admite otro orden correcto, se añade como segundo elemento: ['frase','otra frase válida'].
    ============================================================ */
 const ORDEN=[
- 'Primero me lavo las manos.','Después desayuno cereales con leche.','Luego cojo mi mochila azul.',
- 'Entonces salimos corriendo de casa.','Además, mi hermana toca el piano.','También me gusta dibujar animales.',
- 'Por último, guardamos los juguetes.','Finalmente, nuestro equipo ganó el partido.','Por eso llevo siempre un paraguas.',
- 'Sin embargo, hoy no ha llovido.','Primero, Dylan prepara su casco.','Luego, arranca la moto despacio.',
- 'Entonces, el piloto saludó al público.','Además, el circuito tenía muchas curvas.','También había una cuesta muy empinada.',
- 'Por último, Dylan llegó a la meta.','Finalmente, todos aplaudieron al ganador.','Primero, mezclamos la harina con agua.',
- 'Después, añadimos dos huevos grandes.','Luego, metimos el pastel al horno.','Por último, adornamos la tarta con fresas.',
- 'Además, mi padre trajo un helado.','También vinieron mis primos de Vigo.','Entonces, mi abuela sopló las velas.',
- 'Por eso, hoy estoy muy contento.','Sin embargo, mi perro estaba triste.','Primero, abrimos el libro de lengua.',
- 'Luego, leímos un cuento divertido.','Después, contestamos las preguntas del cuaderno.','Por último, la maestra revisó nuestros dibujos.',
- 'Además, aprendimos palabras nuevas.','También cantamos una canción en inglés.','Entonces sonó el timbre del recreo.',
- 'Finalmente, salimos todos al patio.','Primero, el sol salió detrás del monte.','Después, las nubes cubrieron el cielo.',
- 'Entonces empezó a llover muy fuerte.','Por eso, nos refugiamos bajo un árbol.','Además, soplaba un viento muy frío.',
- 'Finalmente, apareció un bonito arcoíris.','También recogimos conchas en la playa.','Luego, construimos un castillo de arena.',
+ // conector al principio
+ 'Primero me lavo las manos.','Después desayuno cereales con leche.','Además, mi hermana toca el piano.',
+ 'También me gusta dibujar animales.','Por último, guardamos los juguetes.','Finalmente, nuestro equipo ganó el partido.',
+ 'Entonces, el piloto saludó al público.','Luego, arranca la moto despacio.','Sin embargo, hoy no ha llovido.',
+ 'Por eso, hoy estoy muy contento.','Primero, Dylan prepara su casco.','Por último, Dylan llegó a la meta.',
+ 'Entonces sonó el timbre del recreo.','Después, las nubes cubrieron el cielo.','Finalmente, apareció un bonito arcoíris.',
+ 'También cantamos una canción en inglés.',
+ // conector en medio
  'Tengo hambre, pero no hay pan.','Quiero jugar, pero tengo deberes.','Estudio mucho porque quiero aprobar.',
  'Me quedé en casa porque estaba enfermo.','Iré al cine si termino la tarea.','Corrí muy rápido aunque estaba cansado.',
  ['Mi madre cocina mientras yo pongo la mesa.','Mi madre cocina mientras pongo yo la mesa.'],
- 'Por último, apagamos todas las luces.'
+ 'Llovía mucho, por eso nos quedamos en casa.','Hacía frío, así que me puse la bufanda.',
+ ['Me lavé las manos y después cené.','Me lavé las manos y cené después.'],
+ 'Terminé los deberes y luego salí a jugar.','Me gusta el chocolate, sin embargo no como mucho.',
+ 'Estaba cansado, sin embargo seguí corriendo hasta la meta.','Hacía sol, pero el suelo seguía mojado.',
+ 'Mi gato duerme mucho, pero hoy no tiene sueño.','Preparamos la masa, luego la metimos al horno.',
+ 'Abrimos la puerta y entonces vimos la sorpresa.','Ahorré dinero, así que compré un juego nuevo.',
+ 'No pude ir a la fiesta porque estaba enfermo.','El perro ladró fuerte porque vio un gato.',
+ 'Si estudias mucho, entonces aprobarás el examen.','Cuando llegué a casa, me puse el pijama.',
+ ['Mientras yo dibujaba, mi hermana leía un cuento.','Mientras mi hermana leía un cuento, yo dibujaba.'],
+ 'Aunque hacía frío, salimos a jugar.','Como llovía mucho, nos quedamos en casa.',
+ 'Llegamos tarde porque perdimos el autobús.','Fuimos al parque y después merendamos un bocadillo.',
+ 'Dylan entrenó mucho, por eso ganó la carrera.','Guardé los libros, luego cerré la mochila.',
+ 'La profesora explicó la lección, después contestamos las preguntas.','Comimos paella y luego tomamos helado de postre.',
+ 'Quería ir a la playa, pero hacía mucho viento.','Estoy contento porque mañana es mi cumpleaños.',
+ 'Mi abuela cocina muy bien, por eso siempre repito.'
 ].map(x=>Array.isArray(x)?x:[x]);
 
 function reto2(){
@@ -140,7 +148,7 @@ function reto2(){
   return s;
  };
  ex.innerHTML=`<div class="exercise-title">🧩 Ordena las frases</div>
-  <p class="instruction">Las palabras están revueltas. Escribe cada frase bien ordenada (con la primera en mayúscula) y pulsa Validar al final de cada una.</p>
+  <p class="instruction">Las palabras están revueltas y los conectores pueden estar al principio o en medio de la frase. Escribe cada frase bien ordenada y pulsa Validar al final de cada una.</p>
   ${items.map((it,k)=>`<div class="od-card" data-k="${k}"><div class="od-num">${k+1}</div><div class="od-main">
    <div class="od-chips">${scramble(it[0]).map(w=>`<span class="od-chip">${esc(w)}</span>`).join('')}</div>
    <div class="od-row"><input class="od-in" data-k="${k}" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Escribe la frase aquí…" aria-label="Frase ${k+1}"><button class="btn od-ok" data-k="${k}">✅ Validar</button></div>
@@ -179,35 +187,35 @@ function reto2(){
    ============================================================ */
 const CONECT=[
  '[[Primero]] me lavo los dientes, [[después]] me pongo el pijama y [[por último]] leo un cuento antes de dormir.',
- 'Quería salir a jugar al parque, [[pero]] estaba lloviendo mucho.',
- 'Ana estudió toda la tarde [[porque]] mañana tiene un examen de matemáticas muy difícil.',
- 'Llegamos tarde al colegio, [[por eso]] la profesora nos pidió una explicación.',
- 'Me encanta el chocolate; [[sin embargo]], el médico me ha dicho que no coma tanto.',
- 'Mi hermano juega al fútbol y [[además]] entrena tres días a la semana con su equipo.',
- 'Mi prima toca la guitarra y [[también]] canta en el coro del colegio.',
- 'Guardé los libros en la mochila, [[luego]] cerré la cremallera y salí de casa.',
- 'Hacía mucho calor, [[así que]] nos bañamos en la piscina toda la tarde.',
- 'Iremos de excursión a la montaña [[si]] mañana hace buen tiempo.',
- 'Dylan siguió corriendo [[aunque]] estaba muy cansado después de la carrera.',
- '[[Cuando]] termine los deberes, me dejarán ver mi serie favorita.',
- 'Mi madre prepara la comida [[mientras]] yo pongo la mesa y mi padre lava los platos.',
- 'No pude ir a la fiesta [[porque]] estaba enfermo y tenía mucha fiebre.',
+ 'Quería salir a jugar al parque, [[pero]] estaba lloviendo, [[así que]] me quedé en casa y [[después]] dibujé un rato.',
+ 'Ana estudió toda la tarde [[porque]] mañana tiene examen, [[aunque]] estaba cansada, y [[finalmente]] se acostó pronto.',
+ 'Llegamos tarde al colegio, [[por eso]] la profesora se enfadó; [[sin embargo]], nos dejó entrar [[porque]] fuera hacía mucho frío.',
+ 'Me encanta el chocolate [[aunque]] sé que engorda; [[sin embargo]], el médico dice que no coma tanto, [[por eso]] comeré solo un poco.',
+ 'Mi hermano juega al fútbol y [[además]] entrena tres días a la semana, [[pero]] el domingo descansa [[porque]] está muy cansado.',
+ 'Mi prima practica todos los días [[porque]] quiere ser música; [[además]], canta en el coro, [[aunque]] a veces le da vergüenza.',
+ '[[Primero]] guardé los libros en la mochila, [[luego]] cerré la cremallera y [[finalmente]] salí de casa.',
+ 'Hacía mucho calor, [[así que]] nos bañamos en la piscina [[aunque]] el agua estaba muy fría; [[después]], merendamos en el jardín.',
+ 'Iremos de excursión [[si]] mañana no llueve, [[aunque]] hará mucho frío en la montaña.',
+ 'Dylan siguió corriendo [[aunque]] estaba muy cansado, [[porque]] quería ganar la carrera, y [[finalmente]] llegó a la meta.',
+ '[[Cuando]] termine los deberes, me dejarán ver mi serie favorita, [[pero]] solo un capítulo [[porque]] mañana hay colegio.',
+ 'Mi madre prepara la comida [[mientras]] yo pongo la mesa; [[después]], comemos todos juntos [[aunque]] papá llegue tarde.',
+ 'No pude ir a la fiesta [[porque]] estaba enfermo; [[sin embargo]], mis amigos me llamaron [[después]] para contármelo todo.',
  '[[Primero]] cortamos las verduras, [[después]] las echamos a la olla y [[finalmente]] las dejamos cocer una hora.',
- 'Mi gato duerme casi todo el día, [[pero]] por la noche sale a cazar ratones.',
- 'El museo era enorme; [[además]], la entrada era gratis para los niños.',
- 'Estudié mucho para el examen, [[por eso]] saqué una buena nota.',
- 'Quiero ser veterinario [[porque]] me encantan los animales y quiero cuidarlos.',
- 'Nos levantamos temprano, [[entonces]] desayunamos y salimos de viaje hacia la playa.',
- 'No tenía hambre, [[sin embargo]] se comió todo el plato de macarrones.',
- 'Hoy he leído un libro [[y]] he dibujado un paisaje, [[pero]] todavía no he terminado los deberes.',
- 'Si estudias todos los días, [[entonces]] aprenderás más rápido y sacarás mejores notas.',
- '[[Primero]] lavamos el coche, [[luego]] lo secamos con un trapo y [[por último]] le pusimos cera.',
- 'El perro ladró muy fuerte [[porque]] vio un gato en el jardín.',
- 'Quería comprar un juego nuevo, [[pero]] no tenía suficiente dinero, [[así que]] ahorró durante dos meses.',
- 'Mi abuelo cuenta historias muy divertidas; [[además]], siempre trae caramelos para todos.',
- 'Llovió mucho durante la noche, [[por lo tanto]] el río estaba lleno de agua por la mañana.',
- 'Me gustan los helados de fresa [[aunque]] prefiero los de chocolate.',
- 'Trabajamos en equipo durante tres semanas; [[finalmente]], terminamos el proyecto de ciencias.'
+ 'Mi gato duerme casi todo el día, [[pero]] por la noche sale a cazar [[porque]] ve muy bien en la oscuridad; [[por eso]] vuelve cansado por la mañana.',
+ 'El museo era enorme; [[además]], la entrada era gratis para los niños, [[por eso]] fuimos todos [[aunque]] llovía.',
+ 'Estudié mucho para el examen, [[por eso]] saqué buena nota; mi hermano, [[en cambio]], no estudió nada [[porque]] estuvo jugando.',
+ 'Quiero ser veterinario [[porque]] me encantan los animales; [[además]], me gusta ayudar a otros, [[aunque]] sé que tendré que estudiar mucho.',
+ 'Nos levantamos temprano [[porque]] íbamos de viaje, [[entonces]] desayunamos deprisa y salimos hacia la playa [[aunque]] aún era de noche.',
+ 'No tenía hambre, [[sin embargo]] se comió todo el plato [[porque]] estaba riquísimo; [[después]], pidió postre.',
+ 'Hoy he leído un libro [[y]] he dibujado un paisaje, [[pero]] no he terminado los deberes [[porque]] estaba muy cansado.',
+ '[[Cuando]] llegué a casa, me puse el pijama y cené; [[después]], leí un rato [[porque]] no tenía sueño.',
+ '[[Mientras]] mi padre lavaba el coche, yo lo secaba con un trapo; [[después]], le pusimos cera [[aunque]] ya era tarde.',
+ 'El perro ladró muy fuerte [[porque]] vio un gato en el jardín; [[entonces]], el gato saltó la valla, [[aunque]] estaba muy asustado.',
+ 'Quería comprar un juego nuevo, [[pero]] no tenía suficiente dinero, [[así que]] ahorró durante dos meses y [[finalmente]] lo compró.',
+ 'Mi abuelo cuenta historias muy divertidas; [[además]], siempre trae caramelos, [[por eso]] todos lo queremos [[aunque]] a veces se duerma en el sofá.',
+ 'Llovió mucho durante la noche, [[por lo tanto]] el río estaba lleno por la mañana; [[sin embargo]], el sol salió pronto [[mientras]] los niños jugaban en el patio.',
+ 'Me gustan los helados de fresa [[aunque]] prefiero los de chocolate; [[por eso]] siempre pido uno de cada [[cuando]] voy a la heladería.',
+ 'Trabajamos en equipo durante tres semanas [[porque]] el proyecto era difícil; [[finalmente]], lo terminamos [[aunque]] al principio no sabíamos nada.'
 ];
 
 function reto3(){
@@ -218,10 +226,10 @@ function reto3(){
   const p=set[k].split(/\[\[(.+?)\]\]/);              // pares = texto, impares = conector
   const answers=p.filter((_,i)=>i%2);
   ex.innerHTML=`<div class="exercise-title">🧩 Escribe los conectores que faltan</div>
-   <p class="instruction">Escribe en cada hueco el conector que falta. Fíjate bien en las tildes.</p>
+   <p class="instruction">Hay varios huecos en cada frase. Piensa qué conector encaja en cada uno, escríbelo y fíjate bien en las tildes.</p>
    <div class="rd-dots">${set.map((_,j)=>`<div class="rd-dot ${j<k?'done':j===k?'current':''}">${j<k?'✓':j+1}</div>`).join('')}</div>
    <div class="cn-sentence">${p.map((x,i)=>i%2?`<input class="cn-in" data-i="${(i-1)/2}" style="width:${Math.max(6,x.length+3)}ch" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" aria-label="Conector ${(i-1)/2+1}">`:esc(x)).join('')}</div>
-   <div class="cn-bank"><b>Conectores que faltan:</b> ${shuffle(answers).map(a=>`<span class="cn-chip" data-a="${esc(norm(a))}">${esc(a)}</span>`).join('')}</div>
+   <div class="cn-bank"><b>Conectores que faltan:</b> ${shuffle(answers).map(a=>`<span class="cn-chip" data-a="${esc(norm(a))}">${esc(a.toLowerCase())}</span>`).join('')}</div>
    <button class="btn" id="cnOk" style="width:100%;margin-top:12px">✅ Validar la frase ${k+1}</button>`;
   const inputs=[...ex.querySelectorAll('.cn-in')],chips=[...ex.querySelectorAll('.cn-chip')];
   const marcar=()=>chips.forEach(c=>c.classList.toggle('used',inputs.some(i=>norm(i.value)===c.dataset.a)));
@@ -310,7 +318,7 @@ D.registerGame({
  stages:[
   {title:'¿Una R o dos RR?',desc:'Escribe en el hueco una R o dos RR y pulsa Validar. Si fallas, te cuento el error y empiezas de nuevo con palabras nuevas.',run:reto1},
   {title:'¡Ordena las frases!',desc:'Las palabras están revueltas. Escribe cada frase bien ordenada y pulsa Validar. Si fallas, salen frases nuevas.',run:reto2},
-  {title:'¡Los conectores perdidos!',desc:'Escribe el conector que falta en cada frase. Si fallas, te digo el error y vuelves a empezar por la primera.',run:reto3},
+  {title:'¡Los conectores perdidos!',desc:'Cada frase tiene varios conectores perdidos: ¡elige cuál va en cada hueco! Si fallas, te digo el error y vuelves a empezar por la primera.',run:reto3},
   {title:'¡El Memory de las palabras!',desc:'Da la vuelta a las cartas y encuentra las seis parejas. ¡Fíjate bien en cómo se escriben!',run:reto4}
  ]
 });
