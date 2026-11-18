@@ -95,3 +95,38 @@ h2{font-size:23px;margin:0 0 8px}h3{margin:0 0 7px}.muted{color:#667970;font-siz
 .rd-gapw{width:18px}
 @media(max-width:440px){.rd-box{width:31px;height:46px;font-size:22px}.rd-boxes{gap:5px}}
 .rd-select{max-width:210px;border:2px solid #dce5dc;border-radius:9px;padding:6px 8px;font-weight:700;background:#fff;color:var(--ink)}
+
+/* ---- Castellano: Frases y palabras ---- */
+.rw-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+.rw-card{border:1px solid var(--line);border-radius:13px;padding:14px 8px;background:#fbfdf9;text-align:center}
+.rw-word{font-size:27px;font-weight:850;letter-spacing:.02em;display:inline-flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:3px}
+.rw-in{width:58px;height:46px;border:2px solid #dce5dc;border-radius:8px;text-align:center;font-size:25px;font-weight:900;color:var(--ink);background:#fff;text-transform:lowercase}
+.rw-in:focus{outline:2px solid var(--gold);border-color:var(--gold)}.rw-in.ok{border-color:#69b77c;background:#e2f5e8;color:#195b38}.rw-in.bad{border-color:#d55;background:#ffebeb}
+@media(max-width:600px){.rw-grid{grid-template-columns:1fr}}
+.od-card{display:flex;gap:10px;border:1px solid var(--line);border-radius:14px;padding:10px;margin-top:10px;background:#fbfdf9}
+.od-num{width:30px;height:30px;border-radius:50%;background:#ffe3a0;display:grid;place-items:center;font-weight:900;flex:none}
+.od-main{flex:1;min-width:0}.od-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.od-chip{background:#fff1cf;border:1px solid #f0d98a;border-radius:9px;padding:5px 9px;font-weight:850;font-size:17px}
+.od-row{display:flex;gap:8px;align-items:center}
+.od-in{flex:1;min-width:0;height:44px;border:2px solid #dce5dc;border-radius:10px;padding:0 10px;font-size:17px;font-weight:700;color:var(--ink);background:#fff;font-family:inherit}
+.od-in:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+.od-row .btn{padding:10px 12px;white-space:nowrap}
+.od-card.ok{background:#e2f5e8;border-color:#69b77c}.od-card.bad{background:#ffebeb;border-color:#d55}
+@media(max-width:440px){.od-row{flex-direction:column;align-items:stretch}}
+.cn-sentence{font-size:20px;font-weight:700;line-height:2.5;margin:14px 0;padding:12px 16px;background:#fff7e6;border-radius:14px}
+.cn-in{border:0;border-bottom:3px solid #aab8ac;background:#fff;text-align:center;font-size:19px;font-weight:900;color:var(--ink);margin:0 4px;padding:2px 4px;border-radius:6px 6px 0 0;min-width:70px;font-family:inherit}
+.cn-in:focus{outline:2px solid var(--gold);border-bottom-color:var(--gold)}.cn-in.ok{border-bottom-color:#69b77c;background:#e2f5e8;color:#195b38}.cn-in.bad{border-bottom-color:#d55;background:#ffebeb}
+.cn-bank{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;font-size:15px}
+.cn-chip{background:#c7cf7a;border-radius:10px;padding:6px 12px;font-weight:900;font-size:17px}.cn-chip.used{opacity:.35;text-decoration:line-through}
+.mem-info{text-align:center;font-weight:800;color:#667970;margin:8px 0}
+.mem-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;max-width:560px;margin:10px auto;perspective:900px}
+.mcard{position:relative;aspect-ratio:3/4;border:0;padding:0;background:none}
+.mcard .inner{position:absolute;inset:0;transition:transform .45s;transform-style:preserve-3d}
+.mcard.flip .inner{transform:rotateY(180deg)}
+.mcard .face{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:4px;border:2px solid var(--line)}
+.mcard .back{background:linear-gradient(130deg,#163d34,#287457);color:#fff;font-size:34px}
+.mcard .front{background:#fff;transform:rotateY(180deg)}
+.mcard .front .em{font-size:clamp(30px,8vw,46px);line-height:1}
+.mcard .front .wd{font-size:clamp(13px,3.6vw,18px);font-weight:900;overflow-wrap:anywhere;text-align:center;line-height:1.1}
+.mcard.done .front{background:#e2f5e8;border-color:#69b77c}
+@media(max-width:440px){.mem-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}

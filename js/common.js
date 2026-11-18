@@ -57,6 +57,7 @@ D.completeStage=()=>{
 };
 // Vuelve a dibujar un reto tras una pausa, solo si seguimos en el mismo reto
 function later(redraw,ms){const s=S.stage,m=S.mode;setTimeout(()=>{if(S.stage===s&&S.mode===m)redraw();},ms);}
+D.later=later; // lo usan también los juegos de Castellano
 
 /* ---------- Reto de opciones (filas) ----------
    items: [{label(html), correct(texto), opts[textos]}] */
